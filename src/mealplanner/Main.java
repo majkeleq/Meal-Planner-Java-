@@ -22,7 +22,7 @@ public class Main {
 
         Statement statement = connection.createStatement();
 
-        MealAdder mealAdder = new MealAdder(breakfast, lunch, dinner);
+        MealAdder mealAdder = new MealAdder();
         MealDisplayer mealDisplayer = new MealDisplayer(breakfast, lunch, dinner);
 
         boolean toContinue = true;
@@ -30,7 +30,7 @@ public class Main {
             System.out.println("What would you like to do (add, show, exit)?");
             switch (sc.nextLine().toLowerCase()) {
                 case "add" -> mealAdder.chooseMealType(sc, statement);
-                case "show" -> mealDisplayer.displayMeal();
+                case "show" -> mealDisplayer.displayMeal(statement);
                 case "exit" -> {
                     toContinue = false;
                     System.out.println("Bye!");
@@ -39,6 +39,8 @@ public class Main {
                 }
             }
         }
+        statement.executeUpdate("delete from ingredients");
+        statement.executeUpdate("delete from meals");
     }
 
 }

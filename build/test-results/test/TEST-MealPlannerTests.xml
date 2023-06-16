@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MealPlannerTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-06-15T12:00:57" hostname="DESKTOP-77HAML8" time="0.455">
+<testsuite name="MealPlannerTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-06-15T12:09:02" hostname="DESKTOP-77HAML8" time="0.498">
   <properties/>
-  <testcase name="start" classname="MealPlannerTests" time="0.455"/>
+  <testcase name="start" classname="MealPlannerTests" time="0.498"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
 What would you like to do (add, show, exit)?
