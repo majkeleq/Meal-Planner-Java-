@@ -1,9 +1,6 @@
 package mealplanner;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.sql.*;
 
 public class Main {
@@ -13,6 +10,8 @@ public class Main {
         Map<String, List<String>> lunch = new HashMap<>();
         Map<String, List<String>> dinner = new HashMap<>();
 
+        Map<String, HashMap<Integer, String>> menu = new HashMap<>();
+        Map<Integer, LinkedHashSet<String>> ingredients = new HashMap<>();
         String DB_URL = "jdbc:postgresql:meals_db";
         String USER = "postgres";
         String PASS = "1111";
@@ -21,16 +20,35 @@ public class Main {
         connection.setAutoCommit(true);
 
         Statement statement = connection.createStatement();
+        //statement.executeUpdate("drop table if exists ingredients");
+        //statement.executeUpdate("drop table if exists meals");
+        statement.executeUpdate("CREATE TABLE IF NOT EXISTS meals (\n" +
+                "    meal_id INT PRIMARY KEY,\n" +
+                "\tmeal VARCHAR(20),\n" +
+                "\tcategory VARCHAR(10)\n" +
+                ");");
+        statement.executeUpdate("CREATE TABLE IF NOT EXISTS ingredients (\n" +
+                "    ingredient_id INT PRIMARY KEY,\n" +
+                "\tingredient VARCHAR(20),\n" +
+                "\tmeal_id INT,\n" +
+                "\tCONSTRAINT fk_meal FOREIGN KEY (meal_id)\n" +
+                "\tREFERENCES meals(meal_id)\n" +
+                ");");
 
         MealAdder mealAdder = new MealAdder();
         MealDisplayer mealDisplayer = new MealDisplayer(breakfast, lunch, dinner);
+        DatabaseReader databaseReader = new DatabaseReader();
 
         boolean toContinue = true;
         while (toContinue) {
+            databaseReader.readMeals(menu, statement);
+            databaseReader.readIngredients(ingredients, statement);
+            //System.out.println(menu);
+            //System.out.println(ingredients);
             System.out.println("What would you like to do (add, show, exit)?");
             switch (sc.nextLine().toLowerCase()) {
                 case "add" -> mealAdder.chooseMealType(sc, statement);
-                case "show" -> mealDisplayer.displayMeal(statement);
+                case "show" -> mealDisplayer.displayMeals(menu, ingredients);
                 case "exit" -> {
                     toContinue = false;
                     System.out.println("Bye!");
@@ -39,8 +57,8 @@ public class Main {
                 }
             }
         }
-        statement.executeUpdate("delete from ingredients");
-        statement.executeUpdate("delete from meals");
+        //statement.executeUpdate("delete from ingredients");
+        //statement.executeUpdate("delete from meals");
     }
 
 }
