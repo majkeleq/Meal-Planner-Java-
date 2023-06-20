@@ -10,8 +10,7 @@ public class Main {
         Map<String, List<String>> lunch = new HashMap<>();
         Map<String, List<String>> dinner = new HashMap<>();
 
-        Map<String, HashMap<Integer, String>> menu = new HashMap<>();
-        Map<Integer, LinkedHashSet<String>> ingredients = new HashMap<>();
+
         String DB_URL = "jdbc:postgresql:meals_db";
         String USER = "postgres";
         String PASS = "1111";
@@ -37,18 +36,17 @@ public class Main {
 
         MealAdder mealAdder = new MealAdder();
         MealDisplayer mealDisplayer = new MealDisplayer(breakfast, lunch, dinner);
-        DatabaseReader databaseReader = new DatabaseReader();
+
 
         boolean toContinue = true;
         while (toContinue) {
-            databaseReader.readMeals(menu, statement);
-            databaseReader.readIngredients(ingredients, statement);
+
             //System.out.println(menu);
             //System.out.println(ingredients);
             System.out.println("What would you like to do (add, show, exit)?");
             switch (sc.nextLine().toLowerCase()) {
                 case "add" -> mealAdder.chooseMealType(sc, statement);
-                case "show" -> mealDisplayer.displayMeals(menu, ingredients);
+                case "show" -> mealDisplayer.displayMeals(statement);
                 case "exit" -> {
                     toContinue = false;
                     System.out.println("Bye!");

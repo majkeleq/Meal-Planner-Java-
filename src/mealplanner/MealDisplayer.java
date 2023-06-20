@@ -1,5 +1,7 @@
 package mealplanner;
 
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 public class MealDisplayer extends MealAction {
@@ -9,8 +11,12 @@ public class MealDisplayer extends MealAction {
     }
 
 
-    public void displayMeals(Map<String, HashMap<Integer, String>> menu,
-                             Map<Integer, LinkedHashSet<String>> ingredients) {
+    public void displayMeals(Statement statement) throws SQLException {
+        Map<String, HashMap<Integer, String>> menu = new HashMap<>();
+        Map<Integer, LinkedHashSet<String>> ingredients = new HashMap<>();
+        DatabaseReader databaseReader = new DatabaseReader();
+        databaseReader.readMeals(menu, statement);
+        databaseReader.readIngredients(ingredients, statement);
         System.out.println();
         menu.forEach((key, meals) -> {
             System.out.println("Category: " + key);
