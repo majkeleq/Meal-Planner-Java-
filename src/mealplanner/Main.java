@@ -10,7 +10,6 @@ public class Main {
         Map<String, List<String>> lunch = new HashMap<>();
         Map<String, List<String>> dinner = new HashMap<>();
 
-
         String DB_URL = "jdbc:postgresql:meals_db";
         String USER = "postgres";
         String PASS = "1111";
@@ -19,20 +18,20 @@ public class Main {
         connection.setAutoCommit(true);
 
         Statement statement = connection.createStatement();
-        //statement.executeUpdate("drop table if exists ingredients");
-        //statement.executeUpdate("drop table if exists meals");
-        statement.executeUpdate("CREATE TABLE IF NOT EXISTS meals (\n" +
-                "    meal_id INT PRIMARY KEY,\n" +
-                "\tmeal VARCHAR(20),\n" +
-                "\tcategory VARCHAR(10)\n" +
-                ");");
-        statement.executeUpdate("CREATE TABLE IF NOT EXISTS ingredients (\n" +
-                "    ingredient_id INT PRIMARY KEY,\n" +
-                "\tingredient VARCHAR(20),\n" +
-                "\tmeal_id INT,\n" +
-                "\tCONSTRAINT fk_meal FOREIGN KEY (meal_id)\n" +
-                "\tREFERENCES meals(meal_id)\n" +
-                ");");
+        statement.executeUpdate("""
+                CREATE TABLE IF NOT EXISTS meals (
+                    meal_id INT PRIMARY KEY,
+                meal VARCHAR(20),
+                category VARCHAR(10)
+                );""");
+        statement.executeUpdate("""
+                CREATE TABLE IF NOT EXISTS ingredients (
+                    ingredient_id INT PRIMARY KEY,
+                ingredient VARCHAR(20),
+                meal_id INT,
+                CONSTRAINT fk_meal FOREIGN KEY (meal_id)
+                REFERENCES meals(meal_id)
+                );""");
 
         MealAdder mealAdder = new MealAdder();
         MealDisplayer mealDisplayer = new MealDisplayer(breakfast, lunch, dinner);
@@ -40,13 +39,10 @@ public class Main {
 
         boolean toContinue = true;
         while (toContinue) {
-
-            //System.out.println(menu);
-            //System.out.println(ingredients);
             System.out.println("What would you like to do (add, show, exit)?");
             switch (sc.nextLine().toLowerCase()) {
                 case "add" -> mealAdder.chooseMealType(sc, statement);
-                case "show" -> mealDisplayer.displayMeals(statement);
+                case "show" -> mealDisplayer.displayMeals(sc, statement);
                 case "exit" -> {
                     toContinue = false;
                     System.out.println("Bye!");

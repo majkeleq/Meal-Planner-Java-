@@ -9,9 +9,10 @@ public class DatabaseReader {
     public DatabaseReader() {
     }
 
-    public void readMeals(Map<String, HashMap<Integer, String>> menu, Statement statement)
+    @Deprecated
+    public Map<String, HashMap<Integer, String>> readMeals(Statement statement)
             throws SQLException {
-        menu.clear();
+        Map<String, HashMap<Integer, String>> menu = new HashMap<>();
         ResultSet rs = statement.executeQuery("select * from meals");
         while (rs.next()) {
             String category = rs.getString("category");
@@ -19,16 +20,31 @@ public class DatabaseReader {
             meals.put(rs.getInt("meal_id"), rs.getString("meal"));
             menu.put(category, meals);
         }
+        return menu;
     }
 
-    public void readIngredients(Map<Integer, LinkedHashSet<String>> ingredients, Statement statement)
+    public Map<Integer, LinkedHashSet<String>> readIngredients(Statement statement)
             throws SQLException {
-        ingredients.clear();
+        Map<Integer, LinkedHashSet<String>> ingredients = new HashMap<>();
         ResultSet rs = statement.executeQuery("select * from ingredients");
         while (rs.next()) {
             LinkedHashSet<String> mealIngredients = ingredients.getOrDefault(rs.getInt("meal_id"), new LinkedHashSet<>());
             mealIngredients.add(rs.getString("ingredient"));
             ingredients.put(rs.getInt("meal_id"), mealIngredients);
         }
+        return ingredients;
+    }
+
+    public Map<String, HashMap<Integer, String>> readCategory(String category, Statement statement)
+            throws SQLException {
+        Map<String, HashMap<Integer, String>> menu = new HashMap<>();
+        String query = String.format("select * from meals where category LIKE '%s'", category);
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
+            HashMap<Integer, String> meals = menu.getOrDefault(category, new HashMap<>());
+            meals.put(rs.getInt("meal_id"), rs.getString("meal"));
+            menu.put(category, meals);
+        }
+        return menu;
     }
 }

@@ -11,16 +11,17 @@ public class MealDisplayer extends MealAction {
     }
 
 
-    public void displayMeals(Statement statement) throws SQLException {
-        Map<String, HashMap<Integer, String>> menu = new HashMap<>();
-        Map<Integer, LinkedHashSet<String>> ingredients = new HashMap<>();
+    public void displayMeals(Scanner sc, Statement statement) throws SQLException {
+        String category = chooseCategory(sc);
         DatabaseReader databaseReader = new DatabaseReader();
-        databaseReader.readMeals(menu, statement);
-        databaseReader.readIngredients(ingredients, statement);
-        System.out.println();
-        menu.forEach((key, meals) -> {
-            System.out.println("Category: " + key);
-            meals.forEach((key1, value) -> {
+        Map<String, HashMap<Integer, String>> menu = databaseReader.readCategory(category, statement);
+        Map<Integer, LinkedHashSet<String>> ingredients = databaseReader.readIngredients(statement);
+        if (menu.getOrDefault(category, new HashMap<>()).isEmpty()) {
+            System.out.println("No meals found.");
+        } else {
+            System.out.println("Category: " + category);
+            menu.forEach((key, meals) -> meals.forEach((key1, value) -> {
+                System.out.println();
                 System.out.println("Name: " + value);
                 System.out.println("Ingredients:");
                 //List<String> reversedIngredients = new ArrayList<>(ingredients.get(key1));
@@ -28,8 +29,22 @@ public class MealDisplayer extends MealAction {
                 //reversedIngredients.forEach(System.out::println);
                 ingredients.get(key1).forEach(System.out::println);
                 System.out.println();
-            });
-        });
+            }));
+        }
+    }
+
+    private String chooseCategory(Scanner sc) {
+        boolean isGroupChoosen = false;
+        String group = null;
+        System.out.println("Which category do you want to print (breakfast, lunch, dinner)?");
+        while (!isGroupChoosen) {
+            group = sc.nextLine();
+            switch (group) {
+                case "breakfast", "lunch", "dinner" -> isGroupChoosen = true;
+                default -> System.out.println("Wrong meal category! Choose from: breakfast, lunch, dinner.");
+            }
+        }
+        return group;
     }
 
     /*public void displayMeal(){
@@ -46,7 +61,7 @@ public class MealDisplayer extends MealAction {
         }
     }
      */
-    /**
+    /*
      * Metoda wyświetla posiłki i składniki z HashMapy
      * Metoda była używana w Stage 2 - bez użycia SQL
      */
@@ -60,7 +75,7 @@ public class MealDisplayer extends MealAction {
             meal.getValue().forEach(System.out::println);
         }
     }*/
-    /**
+    /*
      * Metoda odczytywała posiłki i składniki bezpośrednio z zapytania SQL
      */
     /*private void displayMealsType(Statement statement, String mealType) throws SQLException {
