@@ -4,10 +4,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
-public class MealDisplayer extends MealAction {
-    public MealDisplayer(Map<String, List<String>> breakfast, Map<String, List<String>> lunch,
-                         Map<String, List<String>> dinner) {
-        super(breakfast, lunch, dinner);
+public class MealDisplayer {
+    public MealDisplayer() {
+
     }
 
 
@@ -24,9 +23,6 @@ public class MealDisplayer extends MealAction {
                 System.out.println();
                 System.out.println("Name: " + value);
                 System.out.println("Ingredients:");
-                //List<String> reversedIngredients = new ArrayList<>(ingredients.get(key1));
-                //Collections.reverse(reversedIngredients);
-                //reversedIngredients.forEach(System.out::println);
                 ingredients.get(key1).forEach(System.out::println);
                 System.out.println();
             }));

@@ -34,7 +34,7 @@ public class Main {
                 );""");
 
         MealAdder mealAdder = new MealAdder();
-        MealDisplayer mealDisplayer = new MealDisplayer(breakfast, lunch, dinner);
+        MealDisplayer mealDisplayer = new MealDisplayer();
 
 
         boolean toContinue = true;
