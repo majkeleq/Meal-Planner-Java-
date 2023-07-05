@@ -5,16 +5,17 @@ import java.sql.Statement;
 import java.util.*;
 
 public class MealDisplayer {
-    public MealDisplayer() {
+    private final Statement statement;
 
+    public MealDisplayer(Statement statement) {
+        this.statement = statement;
     }
 
-
-    public void displayMeals(Scanner sc, Statement statement) throws SQLException {
+    public void displayMeals(Scanner sc) throws SQLException {
         String category = chooseCategory(sc);
-        DatabaseReader databaseReader = new DatabaseReader();
-        Map<String, HashMap<Integer, String>> menu = databaseReader.readCategory(category, statement);
-        Map<Integer, LinkedHashSet<String>> ingredients = databaseReader.readIngredients(statement);
+        DatabaseReader databaseReader = new DatabaseReader(statement);
+        Map<String, HashMap<Integer, String>> menu = databaseReader.readCategory(category);
+        Map<Integer, LinkedHashSet<String>> ingredients = databaseReader.readIngredients();
         if (menu.getOrDefault(category, new HashMap<>()).isEmpty()) {
             System.out.println("No meals found.");
         } else {

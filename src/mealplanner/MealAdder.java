@@ -3,14 +3,15 @@ package mealplanner;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class MealAdder {
-    public MealAdder() {
+    private final Statement statement;
+    public MealAdder(Statement statement) {
+        this.statement = statement;
     }
 
-    public void chooseMealType(Scanner sc, Statement statement) throws SQLException {
+    public void chooseMealType(Scanner sc) throws SQLException {
         boolean toContinue = true;
         while (toContinue) {
             System.out.println("Which meal do you want to add (breakfast, lunch, dinner)?");
@@ -18,19 +19,15 @@ public class MealAdder {
             switch (category) {
                 case "breakfast", "dinner", "lunch" -> addMeal(sc, statement, category);
                 case "exit" -> toContinue = false;
-                default -> {
-                    System.out.println("Wrong meal category! Choose from: breakfast, lunch, dinner.");
-                    continue;
-                }
+                default -> System.out.println("Wrong meal category! Choose from: breakfast, lunch, dinner.");
             }
-            toContinue = false;
         }
     }
 
     public void addMeal(Scanner sc, Statement statement, String category) throws SQLException {
         /* NAME */
         String name = null;
-        String updateQuery = null;
+        String updateQuery;
         boolean isNameValid = false;
         while (!isNameValid) {
             System.out.println("Input the meal's name:");

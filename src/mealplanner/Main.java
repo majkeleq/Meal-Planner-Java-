@@ -6,9 +6,9 @@ import java.sql.*;
 public class Main {
     public static void main(String[] args)  throws SQLException{
         Scanner sc = new Scanner(System.in);
-        Map<String, List<String>> breakfast = new HashMap<>();
+        /*Map<String, List<String>> breakfast = new HashMap<>();
         Map<String, List<String>> lunch = new HashMap<>();
-        Map<String, List<String>> dinner = new HashMap<>();
+        Map<String, List<String>> dinner = new HashMap<>();*/
 
         String DB_URL = "jdbc:postgresql:meals_db";
         String USER = "postgres";
@@ -32,17 +32,25 @@ public class Main {
                 CONSTRAINT fk_meal FOREIGN KEY (meal_id)
                 REFERENCES meals(meal_id)
                 );""");
+        /*statement.executeUpdate("""
+                CREATE TABLE IF NOT EXISTS plan (
+                meal VARCHAR(20),
+                category VARCHAR(10)
+                meal_id INT,
+                CONSTRAINT fk_meal FOREIGN KEY (meal_id)
+                REFERENCES meals(meal_id)
+                );""");*/
 
-        MealAdder mealAdder = new MealAdder();
-        MealDisplayer mealDisplayer = new MealDisplayer();
+        MealAdder mealAdder = new MealAdder(statement);
+        MealDisplayer mealDisplayer = new MealDisplayer(statement);
 
 
         boolean toContinue = true;
         while (toContinue) {
-            System.out.println("What would you like to do (add, show, exit)?");
+            System.out.println("What would you like to do (add, show, plan, exit)?");
             switch (sc.nextLine().toLowerCase()) {
-                case "add" -> mealAdder.chooseMealType(sc, statement);
-                case "show" -> mealDisplayer.displayMeals(sc, statement);
+                case "add" -> mealAdder.chooseMealType(sc);
+                case "show" -> mealDisplayer.displayMeals(sc);
                 case "exit" -> {
                     toContinue = false;
                     System.out.println("Bye!");
