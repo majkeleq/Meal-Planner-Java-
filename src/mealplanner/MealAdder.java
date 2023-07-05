@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class MealAdder {
     private final Statement statement;
+
     public MealAdder(Statement statement) {
         this.statement = statement;
     }
@@ -17,7 +18,10 @@ public class MealAdder {
             System.out.println("Which meal do you want to add (breakfast, lunch, dinner)?");
             String category = sc.nextLine().toLowerCase();
             switch (category) {
-                case "breakfast", "dinner", "lunch" -> addMeal(sc, statement, category);
+                case "breakfast", "dinner", "lunch" -> {
+                    addMeal(sc, statement, category);
+                    toContinue = false;
+                }
                 case "exit" -> toContinue = false;
                 default -> System.out.println("Wrong meal category! Choose from: breakfast, lunch, dinner.");
             }
@@ -39,7 +43,7 @@ public class MealAdder {
             }
         }
         //
-        int mealId = lastIndex("meals", "meal_id", statement) + 1;
+        int mealId = lastIndex("meals", "meal_id") + 1;
         updateQuery = String.format("insert into meals (meal_id, meal, category) values (%d, '%s', '%s')"
                 , mealId, name, category);
         statement.executeUpdate(updateQuery);
@@ -54,7 +58,7 @@ public class MealAdder {
             if (ingredients.stream().map(e -> e.replaceAll(" ", "")).anyMatch(this::isEntryValid)) {
                 System.out.println("Wrong format. Use letters only!");
             } else {
-                int ingredientId = lastIndex("ingredients", "ingredient_id", statement);
+                int ingredientId = lastIndex("ingredients", "ingredient_id");
                 for (String ingredient : ingredients) {
                     ingredientId += 1;
                     updateQuery = String.format("insert into ingredients (ingredient_id,ingredient," +
@@ -74,7 +78,7 @@ public class MealAdder {
         return entry.isEmpty() || Arrays.stream(entry.split("")).anyMatch(ch -> !Character.isLetter(ch.charAt(0)));
     }
 
-    private int lastIndex (String tableName, String columnName, Statement statement) throws SQLException {
+    private int lastIndex(String tableName, String columnName) throws SQLException {
         String query = String.format("select %s from %s order by %s desc limit 1;", columnName, tableName, columnName);
         ResultSet rs = statement.executeQuery(query);
         if (rs.next()) {

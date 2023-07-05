@@ -37,15 +37,15 @@ public class DatabaseReader {
         return ingredients;
     }
 
-    public Map<String, HashMap<Integer, String>> readCategory(String category)
+    public HashMap<Integer, String> readCategory(String category)
             throws SQLException {
-        Map<String, HashMap<Integer, String>> menu = new HashMap<>();
+        HashMap<Integer, String> menu = new HashMap<>();
         String query = String.format("select * from meals where category LIKE '%s'", category);
         ResultSet rs = statement.executeQuery(query);
         while (rs.next()) {
-            HashMap<Integer, String> meals = menu.getOrDefault(category, new HashMap<>());
-            meals.put(rs.getInt("meal_id"), rs.getString("meal"));
-            menu.put(category, meals);
+            //HashMap<Integer, String> meals = menu.getOrDefault(category, new HashMap<>());
+            menu.put(rs.getInt("meal_id"), rs.getString("meal"));
+            //menu.put(category, meals);
         }
         return menu;
     }

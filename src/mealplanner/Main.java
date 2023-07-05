@@ -47,7 +47,7 @@ public class Main {
 
         boolean toContinue = true;
         while (toContinue) {
-            System.out.println("What would you like to do (add, show, plan, exit)?");
+            System.out.println("What would you like to do (add, show, exit)?");
             switch (sc.nextLine().toLowerCase()) {
                 case "add" -> mealAdder.chooseMealType(sc);
                 case "show" -> mealDisplayer.displayMeals(sc);
