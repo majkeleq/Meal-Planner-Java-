@@ -44,4 +44,12 @@ public class MealDisplayer {
         return category;
     }
 
+    public HashMap<Integer, String> getCategory(String category) throws SQLException {
+        return new DatabaseReader(statement)
+                .readCategory(category);
+                //.values()
+                //.stream()
+                //.sorted()
+                //.collect(Collectors.toList());
+    }
 }
