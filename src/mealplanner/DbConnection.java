@@ -25,6 +25,7 @@ public class DbConnection {
                 );""";
     private static final String initializePlan = """
                 CREATE TABLE IF NOT EXISTS plan (
+                day INT,
                 meal VARCHAR(20),
                 category VARCHAR(10),
                 meal_id INT,
