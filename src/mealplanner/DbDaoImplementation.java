@@ -23,7 +23,7 @@ public class DbDaoImplementation {
                     Meal meal = readMeal(category);
                     meal.addIngredientsList(readIngredients());
                     dbMealDao.add(meal);
-                    System.out.println("The meal has been added.");
+                    System.out.println("The meal has been added!");
                     toContinue = false;
                 }
                 case "exit" -> toContinue = false;
@@ -73,32 +73,26 @@ public class DbDaoImplementation {
     }
 
     public void show() {
-        List<Meal> breakfast = dbMealDao.findAll()
-                .stream()
-                .filter(meal -> meal.getCategory().equals("breakfast"))
-                .toList();
-        List<Meal> lunch = dbMealDao.findAll()
-                .stream()
-                .filter(meal -> meal.getCategory().equals("lunch"))
-                .toList();
-        List<Meal> dinner = dbMealDao.findAll()
-                .stream()
-                .filter(meal -> meal.getCategory().equals("dinner"))
-                .toList();
-        if (breakfast.size() == 0 && lunch.size() == 0 && dinner.size() == 0) {
-            System.out.println("No meals added");
-        } else {
-            if (breakfast.size() != 0) {
-                System.out.println("Category: breakfast");
-                breakfast.forEach(meal -> System.out.println(meal.toString()));
-            }
-            if (lunch.size() != 0) {
-                System.out.println("Category: lunch");
-                lunch.forEach(meal -> System.out.println(meal.toString()));
-            }
-            if (dinner.size() != 0) {
-                System.out.println("Category: dinner");
-                dinner.forEach(meal -> System.out.println(meal.toString()));
+        System.out.println("Which category do you want to print (breakfast, lunch, dinner)?");
+        String category = sc.nextLine().toLowerCase();
+        boolean isCategoryValid = false;
+        while (!isCategoryValid) {
+            isCategoryValid = category.equals("breakfast") || category.equals("lunch") || category.equals("dinner");
+            if (isCategoryValid) {
+                String finalCategory = category;
+                List<Meal> categoryList = dbMealDao.findAll()
+                        .stream()
+                        .filter(meal -> meal.getCategory().equals(finalCategory))
+                        .toList();
+                if (categoryList.size() == 0) {
+                    System.out.println("No meals found.");
+                } else {
+                    System.out.println("Category: " + category + "\n");
+                    categoryList.forEach(meal -> System.out.println(meal.toString()));
+                }
+            } else {
+                System.out.println("Wrong meal category! Choose from: breakfast, lunch, dinner.");
+                category = sc.nextLine().toLowerCase();
             }
         }
 
