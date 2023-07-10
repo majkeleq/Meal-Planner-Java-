@@ -89,4 +89,31 @@ public class MealPlanner {
         }
         return day;
     }
+
+    public boolean isEmpty() throws SQLException {
+        ResultSet rs = statement.executeQuery("select count(*) from plan");
+        int rowCount = 0;
+        if (rs.next()) {
+            rowCount = rs.getInt(1);
+        }
+        return rowCount != 0 ? false : true;
+    }
+
+    public HashMap<String, Integer> getShoppingList() throws SQLException {
+        ResultSet rs = statement.executeQuery("select * from plan");
+        List<Integer> mealIDs = new ArrayList<>();
+        while (rs.next()) {
+            mealIDs.add(Integer.valueOf(rs.getString("meal_id")));
+        }
+        HashMap<String, Integer> shoppingList = new HashMap<>();
+        for(Integer id : mealIDs) {
+            rs = statement.executeQuery(String.format("select ingredient from ingredients where meal_id = %d", id));
+            while (rs.next()) {
+                String ingredient = rs.getString(1);
+                int count = shoppingList.getOrDefault(ingredient, 0);
+                shoppingList.put(ingredient, count + 1);
+            }
+        }
+        return shoppingList;
+    }
 }
