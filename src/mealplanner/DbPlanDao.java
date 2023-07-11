@@ -24,7 +24,10 @@ public class DbPlanDao implements PlanDao {
             SELECT m.*
             FROM plan p JOIN meals m ON (p.meal_id = m.meal_id)
              WHERE p.day = %d""";
-    private static final String SELECT_INGREDIENTS = "SELECT * FROM ingredients WHERE meal_id = %d";
+    private static final String SELECT_PLAN_MEALS = """
+    SELECT m.*
+    FROM plan p JOIN meals m ON (p.meal_id = m.meal_id)
+    """;
     private final DbClient dbClient;
 
     public DbPlanDao() {
@@ -46,5 +49,9 @@ public class DbPlanDao implements PlanDao {
     public List<Meal> findByDay(int day) {
 
         return dbClient.selectForList(String.format(SELECT_DAY, day));
+    }
+    @Override
+    public List<Meal> findAll() {
+        return dbClient.selectForList(SELECT_PLAN_MEALS);
     }
 }

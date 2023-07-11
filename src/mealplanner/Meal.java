@@ -3,10 +3,10 @@ package mealplanner;
 import java.util.List;
 
 public class Meal {
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
     private List<String> ingredients;
-    private String category;
+    private final String category;
 
     public Meal(int id, String name, List<String> ingredients, String category) {
         this.id = id;
@@ -41,9 +41,7 @@ public class Meal {
     public String toString() {
         String nameString = "Name: " + getName();
         StringBuilder ingredientsString = new StringBuilder("\nIngredients:\n");
-        ingredients.forEach(ingredient -> {
-            ingredientsString.append(ingredient + "\n");
-        });
+        ingredients.forEach(ingredient -> ingredientsString.append(ingredient).append("\n"));
         return nameString + ingredientsString;
     }
 }

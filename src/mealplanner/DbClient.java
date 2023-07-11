@@ -40,7 +40,7 @@ public class DbClient {
     public List<Meal> selectForList(String query) {
         List<Meal> meals = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
-             Statement statement = connection.createStatement();) {
+             Statement statement = connection.createStatement()) {
             try (ResultSet rs = statement.executeQuery(query)) {
                 while (rs.next()) {
                     int id = rs.getInt("meal_id");

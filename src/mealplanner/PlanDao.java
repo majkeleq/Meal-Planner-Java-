@@ -6,4 +6,5 @@ public interface PlanDao {
     void add(Meal meal, int day);
     void delete();
     List<Meal> findByDay(int day);
+    List<Meal> findAll();
 }

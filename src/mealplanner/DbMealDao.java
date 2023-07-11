@@ -24,7 +24,6 @@ public class DbMealDao implements MealDao {
     private static final String SELECT_MEALS = "SELECT * FROM meals";
     private static final String SELECT_CATEGORY = "SELECT * FROM meals WHERE category = '%s'";
     private static final String SELECT_MEAL = "SELECT * FROM meals WHERE meal_id = %d";
-    private static final String SELECT_INGREDIENTS = "SELECT * FROM ingredients WHERE meal_id = %d";
     private static final String INSERT_MEAL = """
             INSERT INTO meals (meal_id, meal, category)
             VALUES (%d, '%s', '%s')""";

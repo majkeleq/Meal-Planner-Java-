@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MealPlannerTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-07-11T11:08:25" hostname="DESKTOP-77HAML8" time="19.754">
+<testsuite name="MealPlannerTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-07-11T11:46:45" hostname="DESKTOP-77HAML8" time="21.062">
   <properties/>
-  <testcase name="start" classname="MealPlannerTests" time="19.754"/>
+  <testcase name="start" classname="MealPlannerTests" time="21.062"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
+> save
+Unable to save. Plan your meals first.
+What would you like to do (add, show, plan, save, exit)?
 > exit
 Bye!
 ?[1;31m
 Start test 2?[0m
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
+> exit
+Bye!
+?[1;31m
+Start test 3?[0m
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > lunch
@@ -18,7 +26,7 @@ Input the meal's name:
 Input the ingredients:
 > salmon, rice, avocado
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > lunch
@@ -27,7 +35,7 @@ Input the meal's name:
 Input the ingredients:
 > eggs, milk, cheese
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > breakfast
@@ -36,7 +44,7 @@ Input the meal's name:
 Input the ingredients:
 > oats, milk, banana, peanut butter
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > show
 Which category do you want to print (breakfast, lunch, dinner)?
 > lunch
@@ -54,7 +62,7 @@ eggs
 milk
 cheese
 
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > show
 Which category do you want to print (breakfast, lunch, dinner)?
 > breakfast
@@ -67,12 +75,12 @@ milk
 banana
 peanut butter
 
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > exit
 Bye!
 ?[1;31m
-Start test 3?[0m
-What would you like to do (add, show, plan, exit)?
+Start test 4?[0m
+What would you like to do (add, show, plan, save, exit)?
 > show
 Which category do you want to print (breakfast, lunch, dinner)?
 > lunch
@@ -90,7 +98,7 @@ eggs
 milk
 cheese
 
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > show
 Which category do you want to print (breakfast, lunch, dinner)?
 > breakfast
@@ -103,19 +111,19 @@ milk
 banana
 peanut butter
 
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > show
 Which category do you want to print (breakfast, lunch, dinner)?
 > brunch
 Wrong meal category! Choose from: breakfast, lunch, dinner.
 > dinner
 No meals found.
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > exit
 Bye!
 ?[1;31m
-Start test 4?[0m
-What would you like to do (add, show, plan, exit)?
+Start test 5?[0m
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > breakfast
@@ -124,7 +132,7 @@ Input the meal's name:
 Input the ingredients:
 > eggs,milk,cheese
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > breakfast
@@ -133,7 +141,7 @@ Input the meal's name:
 Input the ingredients:
 > bread,cheese,ham
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > breakfast
@@ -142,7 +150,7 @@ Input the meal's name:
 Input the ingredients:
 > oats,milk,banana,peanut butter
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > breakfast
@@ -151,7 +159,7 @@ Input the meal's name:
 Input the ingredients:
 > eggs,sausages,bacon,tomatoes,bread
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > lunch
@@ -160,7 +168,7 @@ Input the meal's name:
 Input the ingredients:
 > salmon,rice,avocado
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > lunch
@@ -169,7 +177,7 @@ Input the meal's name:
 Input the ingredients:
 > chicken,lettuce,tomato,olives
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > lunch
@@ -178,7 +186,7 @@ Input the meal's name:
 Input the ingredients:
 > eggs,milk,cheese
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > lunch
@@ -187,7 +195,7 @@ Input the meal's name:
 Input the ingredients:
 > lettuce,tomato,onion,cheese,olives
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > dinner
@@ -196,7 +204,7 @@ Input the meal's name:
 Input the ingredients:
 > pumpkin,coconut milk,curry,carrots
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > dinner
@@ -205,7 +213,7 @@ Input the meal's name:
 Input the ingredients:
 > beef steak
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > dinner
@@ -214,7 +222,7 @@ Input the meal's name:
 Input the ingredients:
 > flour,tomato,cheese,salami
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > add
 Which meal do you want to add (breakfast, lunch, dinner)?
 > dinner
@@ -223,7 +231,7 @@ Input the meal's name:
 Input the ingredients:
 > tomato,orzo
 The meal has been added!
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
 > plan
 Monday
 english breakfast
@@ -435,7 +443,17 @@ Sunday
 Breakfast: oatmeal
 Lunch: omelette
 Dinner: pizza
-What would you like to do (add, show, plan, exit)?
+What would you like to do (add, show, plan, save, exit)?
+> exit
+Bye!
+?[1;31m
+Start test 6?[0m
+What would you like to do (add, show, plan, save, exit)?
+> save
+Input a filename:
+> plan.txt
+Saved!
+What would you like to do (add, show, plan, save, exit)?
 > exit
 Bye!
 ]]></system-out>
@@ -444,7 +462,7 @@ Bye!
 	at mealplanner.DbMealDao.findLastId(DbMealDao.java:61)
 	at mealplanner.DbMealDaoImplementation.readMeal(DbMealDaoImplementation.java:47)
 	at mealplanner.DbMealDaoImplementation.add(DbMealDaoImplementation.java:23)
-	at mealplanner.DbDaoImplementation.addMeal(DbDaoImplementation.java:12)
+	at mealplanner.DbDaoImplementation.addMeal(DbDaoImplementation.java:14)
 	at mealplanner.Main.main(Main.java:16)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -462,7 +480,7 @@ java.util.NoSuchElementException: No value present
 	at mealplanner.DbMealDao.findLastId(DbMealDao.java:61)
 	at mealplanner.DbMealDaoImplementation.readMeal(DbMealDaoImplementation.java:47)
 	at mealplanner.DbMealDaoImplementation.add(DbMealDaoImplementation.java:23)
-	at mealplanner.DbDaoImplementation.addMeal(DbDaoImplementation.java:12)
+	at mealplanner.DbDaoImplementation.addMeal(DbDaoImplementation.java:14)
 	at mealplanner.Main.main(Main.java:16)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)

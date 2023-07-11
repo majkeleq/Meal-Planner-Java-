@@ -1,5 +1,6 @@
 package mealplanner;
 
+
 public class DbDaoImplementation {
     private final DbMealDaoImplementation dbMealDaoImplementation = new DbMealDaoImplementation();
     private final DbPlanDaoImplementation dbPlanDaoImplementation = new DbPlanDaoImplementation();
@@ -19,5 +20,9 @@ public class DbDaoImplementation {
     public void addPlan() {
         dbPlanDaoImplementation.add(dbMealDaoImplementation.getMeals());
         dbPlanDaoImplementation.show();
+    }
+
+    public void save() {
+        dbPlanDaoImplementation.save();
     }
 }

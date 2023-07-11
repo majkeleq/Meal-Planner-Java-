@@ -11,11 +11,12 @@ public class Main {
 
         boolean toContinue = true;
         while (toContinue) {
-            System.out.println("What would you like to do (add, show, plan, exit)?");
+            System.out.println("What would you like to do (add, show, plan, save, exit)?");
             switch (sc.nextLine().toLowerCase()) {
                 case "add" -> dbDaoImplementation.addMeal();
                 case "show" -> dbDaoImplementation.showMeals();
                 case "plan" -> dbDaoImplementation.addPlan();
+                case "save" -> dbDaoImplementation.save();
                 case "exit" -> {
                     toContinue = false;
                     System.out.println("Bye!");
@@ -24,8 +25,6 @@ public class Main {
                 }
             }
         }
-        //statement.executeUpdate("delete from ingredients");
-        //statement.executeUpdate("delete from meals");
     }
 
 }

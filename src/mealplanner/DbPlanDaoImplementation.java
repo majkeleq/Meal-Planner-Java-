@@ -83,4 +83,20 @@ public class DbPlanDaoImplementation {
         }
         return day;
     }
+
+    public void save() {
+
+        List<Meal> meals = dbPlanDao.findAll();
+        HashMap<String, Integer> ingredients = new HashMap<>();
+        if (meals.size() != 0) {
+            System.out.println("Input a filename:");
+            String name = sc.nextLine();
+            meals.forEach(meal -> meal.getIngredients()
+                    .forEach(ingredient -> ingredients.put(ingredient, ingredients.getOrDefault(ingredient, 0) + 1)));
+            ShoppingListFileWriter shoppingList = new ShoppingListFileWriter();
+            shoppingList.writeShoppingList(ingredients, name);
+        } else {
+            System.out.println("Unable to save. Plan your meals first.");
+        }
+    }
 }
