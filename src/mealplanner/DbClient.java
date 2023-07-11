@@ -7,7 +7,7 @@ import java.util.List;
 public class DbClient {
 
     private final String DB_URL;
-    private  final String USER;
+    private final String USER;
     private final String PASS;
 
     public DbClient(String DB_URL, String USER, String PASS) {
@@ -25,6 +25,7 @@ public class DbClient {
             e.printStackTrace();
         }
     }
+
     public Meal select(String query) {
         List<Meal> meals = selectForList(query);
         if (meals.size() == 1) {
@@ -72,10 +73,10 @@ public class DbClient {
              Statement statement = connection.createStatement()) {
             connection.setAutoCommit(true);
             String query = "SELECT max(%s) FROM %s";
-try (ResultSet rs = statement.executeQuery(String.format(query, column, table))) {
-    while (rs.next()) {
-        return rs.getInt(1);
-    }
+            try (ResultSet rs = statement.executeQuery(String.format(query, column, table))) {
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

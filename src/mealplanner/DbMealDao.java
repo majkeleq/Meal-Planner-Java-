@@ -22,6 +22,7 @@ public class DbMealDao implements MealDao {
             REFERENCES meals(meal_id)
             );""";
     private static final String SELECT_MEALS = "SELECT * FROM meals";
+    private static final String SELECT_CATEGORY = "SELECT * FROM meals WHERE category = '%s'";
     private static final String SELECT_MEAL = "SELECT * FROM meals WHERE meal_id = %d";
     private static final String SELECT_INGREDIENTS = "SELECT * FROM ingredients WHERE meal_id = %d";
     private static final String INSERT_MEAL = """
@@ -41,6 +42,11 @@ public class DbMealDao implements MealDao {
     @Override
     public List<Meal> findAll() {
         return dbClient.selectForList(SELECT_MEALS);
+    }
+
+    @Override
+    public List<Meal> findCategory(String category) {
+        return dbClient.selectForList(String.format(SELECT_CATEGORY, category));
     }
 
     @Override

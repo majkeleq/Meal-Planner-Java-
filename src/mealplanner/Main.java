@@ -11,10 +11,11 @@ public class Main {
 
         boolean toContinue = true;
         while (toContinue) {
-            System.out.println("What would you like to do (add, show, exit)?");
+            System.out.println("What would you like to do (add, show, plan, exit)?");
             switch (sc.nextLine().toLowerCase()) {
-                case "add" -> dbDaoImplementation.add();
-                case "show" -> dbDaoImplementation.show();
+                case "add" -> dbDaoImplementation.addMeal();
+                case "show" -> dbDaoImplementation.showMeals();
+                case "plan" -> dbDaoImplementation.addPlan();
                 case "exit" -> {
                     toContinue = false;
                     System.out.println("Bye!");
